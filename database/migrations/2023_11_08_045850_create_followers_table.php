@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('follows', function (Blueprint $table) {
+        Schema::create('followers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('from_user_id');
-            $table->unsignedBigInteger('to_user_id');
+            $table->foreignId('to_user_id')->nullable()->constrained('users');
+            $table->foreignId('from_user_id')->nullable()->constrained('users');
             $table->timestamps();
-
-            //外部キー制約
-            $table->foreign('from_user_id')->references('id')->on('user');
-            $table->foreign('to_user_id')->references('id')->on('user');
         });
     }
 
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('follows');
+        Schema::dropIfExists('followers');
     }
 };

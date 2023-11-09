@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\TripController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,8 @@ Route::post('/login', LoginController::class)->name('login');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
 Route::middleware(['auth:sanctum'])->group(function () {
+    //全投稿ページ
+    Route::get('/home/{trip_id}',[TripController::class,'index']);
     Route::post('/logout', LogoutController::class)->name('logout');
     Route::get('/user', function (Request $request) {
         return $request->user();

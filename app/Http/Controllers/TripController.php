@@ -12,7 +12,9 @@ class TripController extends Controller
      */
     public function index()
     {
-        //
+        $trips = Trip::all();
+
+    return response()->json($trips);
     }
 
     /**
@@ -20,7 +22,9 @@ class TripController extends Controller
      */
     public function create()
     {
-        //
+        //現在のログインユーザーを取得
+        $user = auth()->user();
+
     }
 
     /**
@@ -36,7 +40,7 @@ class TripController extends Controller
      */
     public function show(Trip $trip)
     {
-        //
+        
     }
 
     /**

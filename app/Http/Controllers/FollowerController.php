@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\follow;
+use App\Models\Follower;
 use Illuminate\Http\Request;
 
-class FollowController extends Controller
+class FollowerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class FollowController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(follow $follow)
+    public function show(Follower $follower)
     {
         //
     }
@@ -42,7 +42,7 @@ class FollowController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(follow $follow)
+    public function edit(Follower $follower)
     {
         //
     }
@@ -50,7 +50,7 @@ class FollowController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, follow $follow)
+    public function update(Request $request, Follower $follower)
     {
         //
     }
@@ -58,7 +58,7 @@ class FollowController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(follow $follow)
+    public function destroy(Follower $follower)
     {
         //
     }

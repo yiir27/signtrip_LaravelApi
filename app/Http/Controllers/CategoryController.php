@@ -12,7 +12,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -20,7 +20,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -36,7 +36,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        
     }
 
     /**
