@@ -13,8 +13,8 @@ class Trip extends Model
     protected $fillable = ['category_id', 'tripTitle', 'image_url', 'user_id'];
 
     //ステータス定数
-    // const PUBLISHED = 1;
-    // const DRAFT = 2;
+    const PUBLISHED = 1;
+    const DRAFT = 2;
 
     //１対多の多の場合リレーション
     public function category(): BelongsTo
