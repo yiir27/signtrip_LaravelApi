@@ -29,10 +29,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //ログアウト
     Route::post('/logout', LogoutController::class)->name('logout');
     //新規投稿
-    Route::post('/users/home/newPost',[TripController::class,'create']);
+    Route::post('/users/home/newPost',[TripController::class,'store']);
     Route::get('/categories',[CategoryController::class,'index']);
-    //投稿下書き保存
-    Route::post('/users/home/new',[TripController::class,'store']);
     
     Route::get('/user', function (Request $request) {
         return $request->user();

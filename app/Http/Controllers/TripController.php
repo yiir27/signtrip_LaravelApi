@@ -31,7 +31,7 @@ class TripController extends Controller
         $trip->user_id = $user->id;
         $trip->category_id = $request->input('category_id');
         $trip->tripTitle = $request->input('tripTitle');
-        // $trip->status = $request->input('status', Trip::DRAFT); //デフォルト値をDRAFTを指定
+        $trip->status = Trip::PUBLISHED; //デフォルト値をDRAFTを指定
 
         //ファイルがアップデートされた場合の処理
         if($request->hasFile('image_url')){
@@ -54,8 +54,27 @@ class TripController extends Controller
      */
     public function store(TripPostRequest $request)
     {
-        // $trip = Trip::create($request->all());
-        // return response()->json(['message' => 'Trip stored successfully', 'trip' => $trip]);
+        //現在のログインユーザーを取得
+        $user = auth()->user();
+
+        $trip = new Trip;
+        $trip->user_id = $user->id;
+        $trip->category_id = $request->input('category_id');
+        $trip->tripTitle = $request->input('tripTitle');
+        $trip->status = Trip::DRAFT; //デフォルト値をDRAFTを指定
+
+        //ファイルがアップデートされた場合の処理
+        if($request->hasFile('image_url')){
+            $file = $request->file('image_url');
+            //タイムスタンプ＋ファイル名
+            $filename = time().'.'.$file->getClientOriginalExtension();
+            //保存先がstorageになるからsail art storage:linkする必要あり シンボリックリンク
+            $path = $file->storeAs('images', $filename, 'public');
+            $trip->image_url = $path;
+        }
+        $trip->save();
+        return response()->json(['message' => '下書きを保存しました']);
+
     }
 
     /**
@@ -64,7 +83,7 @@ class TripController extends Controller
     public function show($trip_id)
     {
         $trip = Trip::with(['category', 'user'])->find($trip_id);
-
+        // $trip = Trip::find($trip_id);
         if(!$trip) {
             //tripが見つからない場合、適切なエラーレスポンスを返す（例: 404 Not Found)
             return response()->json(['message' => 'アイテムが見つかりません'], 404);

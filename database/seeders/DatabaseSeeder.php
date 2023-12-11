@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         //CategoriesTableSeederファイルをシーディングの対象にする
         $this->call(CategoriesTableSeeder::class);
+        $this->call(UsersSeeder::class);
     }
 }
