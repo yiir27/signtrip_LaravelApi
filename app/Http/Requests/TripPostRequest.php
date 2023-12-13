@@ -23,7 +23,9 @@ class TripPostRequest extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
-            'tripTitle' => 'required|unique:trips|max:50',    
+            'tripTitle' => 'required|unique:trips|max:50', 
+            'route_title' => 'max:20|nullable',
+            'route_text'  => 'max:255|nullable',
         ];
     }
 }

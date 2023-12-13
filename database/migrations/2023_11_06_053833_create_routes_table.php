@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('trip_id');
             $table->string('title');
             $table->string('image_url')->nullable();
-            $table->text('article');
+            $table->text('text');
             $table->timestamps();
         });
     }
