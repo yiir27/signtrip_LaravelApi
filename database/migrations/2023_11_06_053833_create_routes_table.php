@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('image_url')->nullable();
             $table->text('text');
+            $table->tinyInteger('routeStatus');
             $table->timestamps();
         });
     }

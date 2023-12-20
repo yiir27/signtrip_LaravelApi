@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable()->constrained();
             $table->string('tripTitle');
             $table->string('image_url');
-            $table->tinyInteger('status');
+            $table->tinyInteger('tripStatus');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
