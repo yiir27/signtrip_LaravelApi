@@ -6,7 +6,7 @@ use App\Http\Requests\TripPostRequest;
 use App\Models\Route;
 use App\Models\Trip;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TripController extends Controller
 {
@@ -56,10 +56,11 @@ class TripController extends Controller
      */
     public function store(TripPostRequest $request)
     {
+        Log::info('Request Data:', $request->all());
         $trip = new Trip();
         $trip->category_id = $request->input('category_id');
         $trip->tripTitle = $request->input('tripTitle');
-        $trip->status = Trip::DRAFT; //デフォルト値をDRAFTを指定
+        $trip->tripStatus =  $request->input('tripStatus'); //デフォルト値をDRAFTを指定
         $trip->user_id = auth()->id();
 
         //ファイルがアップデートされた場合の処理
@@ -77,14 +78,15 @@ class TripController extends Controller
         $route -> trip_id = $trip -> id;
         $route -> title = $request -> input('title');
         $route -> text = $request -> input('text');
+        $route -> routeStatus = $request->input('tripStatus');; //デフォルト値をDRAFTを指定
         //ファイルがアップデートされた場合の処理
-        if($request->hasFile('route_imageUrl')){
-            $file = $request->file('route_imageUrl');
+        if($request->hasFile('image_url')){
+            $file = $request->file('image_url');
             //タイムスタンプ＋ファイル名
             $filename = time().'.'.$file->getClientOriginalExtension();
             //保存先がstorageになるからsail art storage:linkする必要あり シンボリックリンク
             $path = $file->storeAs('routeimages', $filename, 'public');
-            $route -> route_imageUrl = $path;
+            $route -> image_url = $path;
         }
         $route -> save();
 
